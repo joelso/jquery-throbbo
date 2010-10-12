@@ -1,9 +1,18 @@
 h1. Throbbo
 
-Throbbo is a jQuery plugin that makes it easy to show a throbber.
+Throbbo is a jQuery plugin that displays a trobber (aka spinner).
 
 h2. Usage
 
+Wrap throbber in *#foo*. Throbber will show unit a) event *ajaxComplete* is triggered b) page is reloaded
 <code>
 $('#foo').throbbo();
 </code>
+
+Show throbber as an overlay in *#foo*. Throbber will show for 2 sec.
+<code>
+$('#foo').throbbo({mode: 'overlay', duration: 2000});
+</code>
+
+
+
