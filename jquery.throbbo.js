@@ -10,13 +10,15 @@
 	};
 	
 	var debug = true;
-	var throbberHtml = '<img src="throbber.gif" />';
+	//var throbberHtml = '<img src="throbber.gif" />';
 	
 	function _log(msg) {
         if(debug && typeof console !== 'undefined') console.log(msg); 
     }
 	
 	function _wrap(el, opts) {
+		throw('Not yet implemented!');
+
 		var $el;
 		
 		if(opts.container) {
@@ -25,12 +27,12 @@
     		$el = $(el);
 		}
 		
-		$el.wrap(throbberHtml);
+		/*$el.wrap(throbberHtml);
 
 		$el.hide(0).delay(opts.duration).show(0).queue(function() {
             $el.unwrap();
 			$el.dequeue();
-		});
+		});*/
 	}
 	
 	function _overlay(el, opts) {
