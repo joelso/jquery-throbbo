@@ -9,6 +9,8 @@
 			
     <style type="text/css">
 		.throbber { display:block; width:16px; height:16px; }	
+		
+		.throbberEx2 { position:absolute; display:block; background:url(throbber.gif) center center no-repeat;  }	
     </style>
 	
 	<script type="text/javascript">
