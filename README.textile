@@ -1,0 +1,9 @@
+h1. Throbbo
+
+Throbbo is a jQuery plugin that makes it easy to show a throbber.
+
+h2. Usage
+
+{code}
+
+{code}
