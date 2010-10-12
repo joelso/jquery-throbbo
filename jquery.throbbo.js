@@ -17,7 +17,8 @@
     }
 	
 	function _wrap(el, opts) {
-
+		var $el;
+		
 		if(opts.container) {
 			$el = $(opts.container);
 		} else {
@@ -33,25 +34,24 @@
 	}
 	
 	function _overlay(el, opts) {
-        $el = $(el);
+        var $el, $overlay;
+		
+		$el = $(el);
+		
+		$el.prepend('<div class="throbberOverlay"></div>');
+		
+		$overlay = $el.find('.throbberOverlay');
+		
+        $overlay.css({
+            'position': 'absolute',
+            'background': '#f1f1f1 url(' + opts.image + ') center center no-repeat'
+        })
+		.width( $el.width() ).height( $el.height() )
 
-		$el.prepend('<div class="' + opts.cssClass + '"></div>');
-		var $overlay = $el.find('.' + opts.cssClass);
-		
-		$overlay.css({
-			'display': 'block',
-			'position': 'absolute',
-			'background':'url(' + opts.image + ') center center no-repeat',
-			'background-color': 'rgba(255,255,255,0.9)'
-		});
-		
-		$overlay.width($el.width());
-		$overlay.height($el.height());
-		
-		$overlay.delay(opts.duration).queue(function() {
-			$overlay.remove();
-	        $overlay.dequeue();
-		});
+		.delay(opts.duration).queue(function(){
+            $overlay.remove();
+            $overlay.dequeue();
+        });
     }
 	
     $.fn.throbbo = function(opts){
