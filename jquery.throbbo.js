@@ -4,8 +4,9 @@
 	   duration:1000,
 	   complete: function() {},
 	   cssClass: 'throbber',
-	   mode: 'wrap',                    // wrap | child | overlay
-	   container: null
+	   mode: 'wrap',                    // wrap | overlay
+	   container: null,
+	   image:'throbber.gif'
 	};
 	
 	var debug = true;
@@ -31,16 +32,18 @@
 		});
 	}
 	
-	function _firstChild(el, opts) {
+	function _overlay(el, opts) {
         $el = $(el);
 
-        // set height, width 100%
-		// set background (opacity if webkit)
-		// append img
-		// center it?
-        
 		$el.prepend('<div class="' + opts.cssClass + '"></div>');
 		var $overlay = $el.find('.' + opts.cssClass);
+		
+		$overlay.css({
+			'display': 'block',
+			'position': 'absolute',
+			'background':'url(' + opts.image + ') center center no-repeat',
+			'background-color': 'rgba(255,255,255,0.9)'
+		});
 		
 		$overlay.width($el.width());
 		$overlay.height($el.height());
@@ -51,17 +54,17 @@
 		});
     }
 	
-    $.fn.throbber = function(opts){
+    $.fn.throbbo = function(opts){
         
         return this.each(function() {
-            _log('[jquery.fakeThrobber] ' + this);
+            _log('[jquery.throbbo] ' + this);
             opts = $.extend({}, defaultOpts, opts);
 			
 			if(opts.mode === 'wrap') {
 				_wrap(this, opts);
 			} 
-			else if(opts.mode === 'firstChild') {
-				_firstChild($(opts.container), opts);
+			else if(opts.mode === 'overlay') {
+				_overlay($(opts.container), opts);
 			}
         });
         
