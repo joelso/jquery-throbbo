@@ -1,8 +1,10 @@
 (function($){
 
+    var debug = false;
+
     var defaultOpts = {
         // How long throbber will show, in ms
-        duration: 1000,
+        duration: 500,
         
         // Callback when throbber has shown for given duration
         complete: function(){},
@@ -18,8 +20,6 @@
 		// CSS property 'z-index' for overlay
 		zIndex: 2
     };
-    
-    var debug = true;
     
     function _log(msg){
         if (debug && typeof console !== 'undefined') 
