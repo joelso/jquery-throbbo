@@ -3,8 +3,9 @@
     var debug = false;
 
     var defaultOpts = {
-        // How long throbber will show, in ms
-        duration: 500,
+        // How long throbber will show, in ms. If '0' throbber
+		// will show until page is reloaded
+        duration: 0,
         
         // Callback when throbber has shown for given duration
         complete: function(){},
@@ -57,9 +58,11 @@
 		.width($el.width()).height($el.height())
 		
 		.delay(opts.duration).queue(function(){
-            $overlay.remove();
+            if(opts.duration > 0) {
+    			$overlay.remove();
+				opts.complete();
+			}
             $overlay.dequeue();
-			opts.complete();
         });
     }
     
