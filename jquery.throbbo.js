@@ -10,7 +10,6 @@
 	};
 	
 	var debug = true;
-	//var throbberHtml = '<img src="throbber.gif" />';
 	
 	function _log(msg) {
         if(debug && typeof console !== 'undefined') console.log(msg); 
