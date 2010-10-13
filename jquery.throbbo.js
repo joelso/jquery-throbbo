@@ -12,8 +12,11 @@
         // In what way throbber will show
         mode: 'overlay',
         
-        // Path to image, relative to this script or absolute
-        image: 'throbber.gif'
+        // Path to image, relative to HTML-page or absolute
+        image: 'throbber.gif',
+		
+		// CSS property 'z-index' for overlay
+		zIndex: 2
     };
     
     var debug = true;
@@ -42,9 +45,12 @@
     
     function _overlay(el, opts){
         var $el = $(el).prepend('<div class="throbberOverlay"></div>');
-        
-        var $overlay = $el.find('.throbberOverlay').css({
+		
+        var $overlay = $el.find('.throbberOverlay');
+		
+		$overlay.css({
             'position': 'absolute',
+			'z-index': opts.zIndex,
             'background': '#f1f1f1 url(' + opts.image + ') center center no-repeat'
         })
 		
@@ -66,10 +72,9 @@
             if (opts.mode === 'wrap') {
                 _wrap(this, opts);
             }
-            else 
-                if (opts.mode === 'overlay') {
-                    _overlay($(opts.container), opts);
-                }
+            else if (opts.mode === 'overlay') {
+                _overlay(this, opts);
+            }
         });
         
     };
