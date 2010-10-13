@@ -14,6 +14,9 @@
         
         // In what way throbber will show
         mode: 'overlay',
+		
+		// Overlay background color, a hex-code or 'inherit'
+		bgColor: 'inherit',
         
         // Path to image, relative to HTML-page or absolute
         image: 'throbber.gif',
@@ -29,19 +32,6 @@
     
     function _wrap(el, opts){
         throw ('Not yet implemented!');
-        
-        var $el = $(el);
-        
-        /*$el.wrap(throbberHtml);
-        
-         $el.hide(0).delay(opts.duration).show(0).queue(function() {
-        
-         $el.unwrap();
-        
-         $el.dequeue();
-        
-         });*/
-        
     }
     
     function _overlay(el, opts){
@@ -52,7 +42,8 @@
 		$overlay.css({
             'position': 'absolute',
 			'z-index': opts.zIndex,
-            'background': '#f1f1f1 url(' + opts.image + ') center center no-repeat'
+            'background': 'url(' + opts.image + ') center center no-repeat',
+			'background-color': opts.bgColor
         })
 		
 		.width($el.width()).height($el.height())

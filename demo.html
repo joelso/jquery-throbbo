@@ -21,31 +21,20 @@
 		});
 		
         $('#ex2').click(function() {
-            $(this).throbbo({
-                duration: 1000,
-                image: 'throbber.gif',
-                container: '#ex2_container',
-				cssClass: 'throbberEx2',
-				mode: 'overlay'
+            $('#ex2_container').throbbo({
+                duration: 0,
+                image: 'throbber.gif'
             });
             return false;
         });
     
     });
-	   
-	   	
-		
 	</script>
 </head>
 <body>
-    
-	<h2>Inline element with 'wrap'</h2>
-	<p>
-		Click <a href="#" id="ex1">me</a> to show spinner!
-	</p>
 	
 	<h2>Block element with 'overlay'</h2>
-	<div style="width:100px; height:100px;border:1px solid #ccc;" id="ex2_container">
+	<div style="width:100px; height:100px;border:1px solid #ccc; background-color:#f1f1f1;" id="ex2_container">
 	   <p>Click <a href="#" id="ex2">me</a> to show overlay spinner.</p>
 	</div>
 	
