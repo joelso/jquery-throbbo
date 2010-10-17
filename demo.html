@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>jquery.throbbo DEMO</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.throbbo.js"></script>
+			
+    <style type="text/css">
+		.throbber { display:block; width:16px; height:16px; }	
+    </style>
+	
+	<script type="text/javascript">
+	   
+    $(document).ready(function() {
+        
+		$('#ex1').click(function() {
+            $(this).throbbo({duration:1000, image:'throbber.gif'});
+			return false;
+		});
+		
+        $('#ex2').click(function() {
+            $('#ex2_container').throbbo({
+                duration: 0,
+                image: 'throbber.gif'
+            });
+            return false;
+        });
+    
+    });
+	</script>
+</head>
+<body>
+	
+	<h2>Block element with 'overlay'</h2>
+	<div style="width:100px; height:100px;border:1px solid #ccc; background-color:#f1f1f1;" id="ex2_container">
+	   <p>Click <a href="#" id="ex2">me</a> to show overlay spinner.</p>
+	</div>
+	
+</body>
+</html>
