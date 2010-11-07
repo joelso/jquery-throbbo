@@ -1,5 +1,5 @@
 /*!
- * jQuery Trobbo Plugin
+ * jQuery Throbbo Plugin
  * version: 0.1
  * @requires jQuery v1.3.2 or later
  *
