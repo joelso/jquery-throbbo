@@ -9,19 +9,23 @@
  */
 (function($){
 
-    var debug = false;
+    var debug = true;
 
     var defaultOpts = {
         // How long throbber will show, in ms. If '0' throbber
 		// will show until page is reloaded
         duration: 0,
         
-        // Callback when throbber has shown for given duration
+        // Callback for when throbber has shown for given duration
         complete: function(){},
         
-        cssClass: 'throbber',
+		// CSS class of throbber element
+        cssClass: 'throbbo',
         
-        // In what way throbber will show
+        // Decide how throbber will show:
+		//
+		// 'overlay' (default) show throbber centered in an overlaying div on top of target element
+		// 'insertBefore' insert throbber as an image before the target element
         mode: 'overlay',
 		
 		// Overlay background color, a hex-code or 'inherit'
@@ -31,22 +35,21 @@
         image: 'throbber.gif',
 		
 		// CSS property 'z-index' for overlay
-		zIndex: 2
+		zIndex: 2,
+		
+		// Custom CSS style for throbber
+		styles: {}
     };
     
     function _log(msg){
         if (debug && typeof console !== 'undefined') 
-            console.log(msg);
-    }
-    
-    function _wrap(el, opts){
-        throw ('Not yet implemented!');
+            console.log('[jquery.throbbo] ' + msg);
     }
     
     function _overlay(el, opts){
-        var $el = $(el).prepend('<div class="throbberOverlay"></div>');
+        var $el = $(el).prepend('<div class="' + opts.cssClass +'"></div>');
 		
-        var $overlay = $el.find('.throbberOverlay');
+        var $overlay = $el.find('.' + opts.cssClass);
 		
 		$overlay.css({
             'position': 'absolute',
@@ -55,28 +58,61 @@
 			'background-color': opts.bgColor
         })
 		
-		.width($el.width()).height($el.height())
+		.css(opts.styles)
 		
-		.delay(opts.duration).queue(function(){
-            if(opts.duration > 0) {
-    			$overlay.remove();
-				opts.complete();
-			}
-            $overlay.dequeue();
-        });
+		.width($el.width()).height($el.height());
+		
+		_queue($overlay, $el, opts);
     }
+	
+	function _insertBefore($el, opts) {
+		if(_isThrobboActive($el)) {
+			_log("Throbbo is already active, do nothing");
+			return;
+		} 
+		
+		_setThrobboActive($el, true);
+		
+		var $img = $('<img src="' + opts.image + '" class="' + opts.cssClass +'" /> ');
+		
+		$img.css(opts.styles).insertBefore($el);
+		
+		_queue($img, $el, opts);
+	}
+	
+	function _queue($throbber, $el, opts) {
+        $throbber.delay(opts.duration).queue(function(){
+            if (opts.duration > 0) {
+                $throbber.remove();
+				
+                _setThrobboActive($el, false);
+               
+			    opts.complete();
+            }
+            $throbber.dequeue();
+        });
+	}
+	
+	function _isThrobboActive($el) {
+		return $el.data('jquery.throbbo.active');
+	}
+	
+	function _setThrobboActive($el, val) {
+		$el.data('jquery.throbbo.active', val);
+	}
     
     $.fn.throbbo = function(opts){
     
         return this.each(function(){
-            _log('[jquery.throbbo] ' + this);
             opts = $.extend({}, defaultOpts, opts);
             
-            if (opts.mode === 'wrap') {
-                _wrap(this, opts);
+			var $this = $(this);
+			
+            if (opts.mode === 'overlay') {
+                _overlay($this, opts);
             }
-            else if (opts.mode === 'overlay') {
-                _overlay(this, opts);
+            else if (opts.mode === 'insertBefore') {
+                _insertBefore($this, opts);
             }
         });
         
