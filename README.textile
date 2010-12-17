@@ -10,7 +10,14 @@ Show throbber as an overlay in *#foo*. Throbber will show for 2 sec.
 $('#foo').throbbo({duration: 2000});
 </code>
 
-"Check it out i action here":http://dl.dropbox.com/u/3049118/lab/jquery-throbbo/demo.html
+Show throbber as an inline image inserted _before_ *#bar*.
+
+<code>
+$('#bar').throbbo({duration: 2000, mode:'insertBefore'});
+</code>
+
+
+"Check it out i action here":http://afartinspace.com/lab/jquery-throbbo/demo.html
 
 
 
