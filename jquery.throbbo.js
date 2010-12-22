@@ -9,7 +9,7 @@
  */
 (function($){
 
-    var debug = true;
+    var debug = false;
 
     var defaultOpts = {
         // How long throbber will show, in ms. If '0' throbber
